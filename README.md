@@ -50,6 +50,8 @@ services:
       POSTGRES_USER: budget
       POSTGRES_PASSWORD: budget
       POSTGRES_DB: budget
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
     networks:
       - default
   bot:
@@ -58,8 +60,6 @@ services:
     environment:
       TELEGRAM_TOKEN: ${TELEGRAM_TOKEN}
       POSTGRES_URL: postgres://budget:budget@postgres/budget
-    volumes:
-      - ./bot:/service
     depends_on:
       - postgres
     networks:
