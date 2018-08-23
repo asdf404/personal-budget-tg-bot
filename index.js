@@ -18,5 +18,5 @@ if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
       console.log('app restarted due to:', ...files)
     })
 } else {
-  require('./src/run')
+  require('./src/bot')
 }

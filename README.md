@@ -50,8 +50,6 @@ services:
       POSTGRES_USER: budget
       POSTGRES_PASSWORD: budget
       POSTGRES_DB: budget
-    volumes:
-      - ./data/postgres:/var/lib/postgresql/data
     networks:
       - default
   bot:
