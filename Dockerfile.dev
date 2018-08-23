@@ -1,0 +1,8 @@
+FROM node:10.2.1-alpine
+
+VOLUME /service
+WORKDIR /service
+
+ENTRYPOINT ["/service/entrypoint.sh"]
+
+CMD ["node", "--harmony", "./index.js"]

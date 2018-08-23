@@ -1,0 +1,47 @@
+{
+  "name": "personal-budget-bot",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Personal Budget Telegram bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --harmony",
+    "test:watch": "mocha --harmony --watch",
+    "start": "node --harmony ./index.js",
+    "migrate": "sequelize db:migrate",
+    "migrate:down": "sequelize db:migrate:undo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:asdf404/personal-budget-tg-bot.git"
+  },
+  "authors": "Pavel Kilin <pavel@asdf404.net>",
+  "license": "BSD",
+  "homepage": "https://github.com/asdf404/personal-budget-tg-bot#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "eslint": "^5.4.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-mocha": "^5.2.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.3",
+    "sinon": "^6.1.5"
+  },
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "enum": "^2.5.0",
+    "hashtag-regex": "^2.0.0",
+    "i18n": "^0.8.3",
+    "ms": "^2.0.0",
+    "node-telegram-bot-api": "^0.30.0",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "ramda": "^0.25.0",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.1.1"
+  }
+}
