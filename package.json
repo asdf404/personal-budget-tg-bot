@@ -1,7 +1,7 @@
 {
   "name": "personal-budget-bot",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Personal Budget Telegram bot",
   "main": "index.js",
   "scripts": {
