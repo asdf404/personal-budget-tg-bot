@@ -75,7 +75,7 @@ And start it:
 $ docker-compose up -d
 ```
 
-## Developemnt and testing
+## Development and testing
 
 Create `config-testing.yml`:
 
