@@ -8,6 +8,7 @@
     "test": "mocha --harmony",
     "test:watch": "mocha --harmony --watch",
     "start": "node --harmony ./index.js",
+    "stub": "node ./stub.js",
     "migrate": "sequelize db:migrate",
     "migrate:down": "sequelize db:migrate:undo"
   },

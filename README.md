@@ -8,7 +8,7 @@ You can deploy your own bot (as described below) or use existing one: [@asdf_per
 
 ```
 /help — help
-<amount> [<hashtag>, ...] [<comment>] — add new entry, e.g. '150 #food #burger #cola Burger and cola'. <hashtag> and <comment> is optional
+<amount> [<hashtag>, ...] [<comment>] — add new entry, e.g. '150 awesome #burger and #cola'. <hashtag> and <comment> is optional
 /revert — soon
 /report — soon
 /dump — soon
@@ -17,8 +17,8 @@ You can deploy your own bot (as described below) or use existing one: [@asdf_per
 Example usage:
 
 ```
-YOU: 100 #food #burger #cola Burger and cola in my favorite place
-BOT: Added 100RUB
+YOU: 150 awesome #burger and #cola
+BOT: Added 150RUB
 YOU: 2000 Some wrong entry
 BOT: Added 2000RUB
 YOU: /revert
@@ -74,6 +74,26 @@ And start it:
 ```
 $ docker-compose up -d
 ```
+
+## Developemnt and testing
+
+Create `config-testing.yml`:
+
+```
+version: '3'
+
+services:
+  postgres:
+    volumes:
+      - ./data/postgres_test:/var/lib/postgresql/data
+  bot:
+    build:
+      context: ./bot # path to source code of bot
+      dockerfile: Dockerfile.dev
+    command: [ 'npm', 'run', 'stub' ]
+```
+
+Start in test mode `docker-compose -f docker-compose.yml -f config-testing.yml up -d` and then run tests `docker-compose exec bot npm run test:watch`.
 
 ## License
 
