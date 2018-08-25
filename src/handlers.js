@@ -1,4 +1,6 @@
 const { uniq } = require('ramda')
+const table = require('markdown-table')
+const { Op } = require('sequelize')
 const { User, Entry } = require('./models')
 const regex = require('./regex')
 const { Currencies } = require('./enums')
@@ -88,10 +90,47 @@ async function revert (bot, data) {
   )
 }
 
-async function report (bot, { from: { id } }) {
+async function report (bot, data) {
+  const user = await User.find({ where: { telegramId: String(data.from.id) } })
+  const tags = uniq(data.text.match(regex.tags) || [])
+
+  const criteria = [
+    { 'user_id': user.id },
+    sequelize.where(
+      sequelize.fn('date', sequelize.col('created_at')),
+      { [Op.between]: [
+        sequelize.fn('to_timestamp', Math.round(Date.now() / 1000) - 7 * 24 * 3600),
+        sequelize.fn('to_timestamp', Math.round(Date.now() / 1000))
+      ] }
+    )
+  ]
+
+  if (tags.length) {
+    criteria.push({
+      tags: {
+        [Op.contains]: tags
+      }
+    })
+  }
+
+  const entries = await Entry.findAll({
+    attributes: [
+      [ sequelize.fn('date', sequelize.col('created_at')), 'date' ],
+      [ sequelize.fn('sum', sequelize.col('value')), 'sum' ]
+    ],
+    group: [ sequelize.fn('date', sequelize.col('created_at')) ],
+    where: criteria
+  })
+
+  const rendered = table([
+    [ 'date', 'amount' ],
+    ...entries.map(entry =>
+      [ entry.getDataValue('date'), entry.getDataValue('sum') ])
+  ])
+
   bot.sendMessage(
-    id,
-    'reports is not available yet',
+    data.from.id,
+    `Report for last week:\n\n\`\`\`\n${rendered}\n\`\`\``,
     MSG_OPTS
   )
 }

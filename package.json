@@ -37,6 +37,7 @@
     "enum": "^2.5.0",
     "hashtag-regex": "^2.0.0",
     "i18n": "^0.8.3",
+    "markdown-table": "^1.1.2",
     "ms": "^2.0.0",
     "node-telegram-bot-api": "^0.30.0",
     "pg": "^7.4.3",
