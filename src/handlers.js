@@ -68,13 +68,22 @@ async function add (bot, data) {
     comment
   })
 
-  bot.sendMessage(data.from.id, `Added: ${entry.value}RUB`)
+  bot.sendMessage(data.from.id, `Added: ${entry.value}${entry.currency}`)
 }
 
-async function revert (bot, { from: { id } }) {
+async function revert (bot, data) {
+  const user = await User.find({ where: { telegramId: String(data.from.id) } })
+  const entry = await Entry.find({
+    where: { userId: user.id },
+    order: [
+      [ 'createdAt', 'DESC' ]
+    ]
+  })
+  await entry.destroy({})
+
   bot.sendMessage(
-    id,
-    'revert is not available yet',
+    data.from.id,
+    `Reverted: ${entry.value}${entry.currency}`,
     MSG_OPTS
   )
 }

@@ -9,7 +9,7 @@ You can deploy your own bot (as described below) or use existing one: [@asdf_per
 ```
 /help — help
 <amount> [<hashtag>, ...] [<comment>] — add new entry, e.g. '150 awesome #burger and #cola'. <hashtag> and <comment> is optional
-/revert — soon
+/revert — reverts last entry
 /report — soon
 /dump — soon
 ```
